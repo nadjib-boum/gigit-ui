@@ -1,23 +1,14 @@
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/accordion/accordion";
-
+import Header from "@/components/sections/landing-page/Header"
+import Services from "@/components/sections/landing-page/Services";
+import Benefits from "@/components/sections/landing-page/Benefits";
 
 
 export default function Home() {
   return (
-    <div className="w-2/4 m-4">
-      <Accordion type="single" collapsible>
-        <AccordionItem value="item-1">
-          <AccordionTrigger>Is it accessible?</AccordionTrigger>
-          <AccordionContent>
-            Yes. It adheres to the WAI-ARIA design pattern.
-          </AccordionContent>
-        </AccordionItem>
-      </Accordion>
+    <div className="landing-page">
+      <Header />
+      <Services />
+      <Benefits />
     </div>
   )
 }
