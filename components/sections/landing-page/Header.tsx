@@ -1,29 +1,26 @@
 import Image from 'next/image';
-import Container from '@/components/layouts/Container/Container';
+import Container from '@/components/layouts/Container';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 
 // #07071C
 const Header: React.FC = () => {
   return (
-    <section className='h-screen pt-32 relative'>
-      <div className='logo absolute top-8 left-28'>
-        <h1 className='text-xl font-black'>GIG.it</h1>
-      </div>
+    <section className='h-screen pt-16'>
       <Container>
-        <div className='flex items-center justify-between'>
-          <div className='w-2/4'>
-            <h1 className='font-black text-4xl mb-3'>
+        <div className='flex flex-col items-center md:flex-row md:justify-between'>
+          <div className='flex flex-col gap-3 md:w-1/2'>
+            <h1 className='font-black text-3xl mb-3 md:text-4xl'>
               Effortless Freelance Hiring: Simplify Your Search on our Platform
             </h1>
-            <p>
+            <p className='mb-8 text-lg'>
               Connecting freelancers and clients for seamless collaboration and project success.
             </p>
-            <form action="" className='mt-4 flex justify-start gap-2'>
-              <Input type="text" placeholder='Try Web Design' className='w-3/4' />
-              <Button>Search</Button>
+            <form action="" className='mt-4 flex flex-col md:flex-row justify-start gap-2'>
+              <Input type="text" placeholder='Try Web Design' className='w-full mb-2 md:w-3/4' />
+              <Button className='w-full md:w-auto'>Search</Button>
             </form>
-            <ul className='flex gap-1 mt-4 text-sm'>
+            <ul className='hidden md:flex gap-2 mt-5 text-sm'>
               <li>
                 <a href="#" className='block px-2 py-1 bg-gray-300 rounded-md'>web design</a>
               </li>
@@ -38,7 +35,7 @@ const Header: React.FC = () => {
               </li>
             </ul>
           </div>
-          <div className='w-2/4 flex justify-end items-center'>
+          <div className='hidden justify-end items-center md:flex md:w-1/2 '>
             <Image src="/hero.svg" alt="hero" width={450} height={350} />
           </div>
         </div>

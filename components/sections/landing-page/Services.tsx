@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import Container from "@/components/layouts/Container/Container";
+import Container from "@/components/layouts/Container";
 
 type ServiceProps = {
   label: string;
@@ -17,10 +17,10 @@ const Service: React.FC<ServiceProps> = ({ label, image }) => {
 
 const Services: React.FC = () => {
   return (
-    <section className='py-20'>
+    <section className='py-10 md:py-20'>
       <Container>
         <h2 className="block text-4xl font-bold text-center">Services</h2>
-        <div className="grid grid-cols-4 grid-rows-2 gap-x-4 gap-y-12 mt-12">
+        <div className="grid grid-cols-2 grid-rows-2 gap-x-4 gap-y-12 mt-12 md:grid-cols-4 md:grid-rows-2">
           <Service label='Graphic Design' image='graphic-design.png' />
           <Service label='Web Design' image='web-design.png' />
           <Service label='Programming' image='programming.png' />

@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import Container from "@/components/layouts/Container/Container";
+import Container from "@/components/layouts/Container";
 
 type TestimonialProps = {
   text: string;
@@ -36,7 +36,7 @@ const Testimonials: React.FC = () => {
     <section className="py-20">
       <Container>
         <h1 className="text-4xl font-bold text-center mb-12">Testimonials</h1>
-        <div className="grid grid-cols-3 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <Testimonial avatar='avatar-1.jpg' text="Working on this freelance platform has been a game-changer for my career. I've connected with amazing clients and have been able to showcase my skills on diverse projects." person="Devon Lane" role="President of Sales"  />
           <Testimonial avatar='avatar-2.jpg' text="I've been freelancing for years, and this platform stands out from the rest. It's user-friendly, offers great support, and provides a steady stream of quality clients." person="Devon Lane" role="President of Sales"  />
           <Testimonial avatar='avatar-3.jpg' text="Finding freelance work used to be a struggle, but thanks to this platform, I now have a consistent flow of interesting projects that match my skills and interests." person="Devon Lane" role="President of Sales"  />

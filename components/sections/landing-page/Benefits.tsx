@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import Container from "@/components/layouts/Container/Container";
+import Container from "@/components/layouts/Container";
 import { Check } from 'lucide-react';
 
 type BenefitProps = {
@@ -26,7 +26,7 @@ const Benefits: React.FC = () => {
     <section className="py-20">
       <Container>
         <div className="flex justify-between items-center">
-          <div className="w-1/2">
+          <div className="md:w-1/2">
             <h2 className="text-3xl font-bold">The best part? Everything.</h2>
             <ul className="flex flex-col gap-8 mt-8">
               <Benefit  title="Stick to your budget" description="Find the right service for every price point. No hourly rates, just project-based pricing."  />
@@ -35,7 +35,7 @@ const Benefits: React.FC = () => {
               <Benefit  title="Count on 24/7 support" description="Our round-the-clock support team is available to help anytime, anywhere."  />
             </ul>
           </div>
-          <div className="w-1/2 flex justify-end">
+          <div className="hidden md:w-1/2 md:flex md:justify-end">
             <Image src="/benefits.svg" width={500} height={400} alt="Benefits" />
           </div>
         </div>

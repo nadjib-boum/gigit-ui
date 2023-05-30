@@ -1,5 +1,6 @@
 import { Poppins } from 'next/font/google';
-import './globals.css'
+import Modals from '@/components/modals';
+import './globals.css';
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -20,6 +21,7 @@ export default function RootLayout({
     <html lang="en" className={poppins.className}>
       <body style={{ height: '3000px' }}>
         { children }
+        <Modals />
       </body>
     </html>
   )
