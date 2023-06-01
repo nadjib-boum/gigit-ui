@@ -1,4 +1,5 @@
-import { useCallback } from "react";
+"use client";
+import { useCallback, useEffect, useState } from "react";
 import * as z from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -21,7 +22,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/modal";
-
+import { useSignup } from "@/hooks/api/auth/auth.api";
 
 const loginFormSchema = z.object({
   email: 
@@ -48,6 +49,8 @@ const loginFormSchema = z.object({
 
 const RegisterModal = () => { 
 
+  const { mutate: signup, isSuccess, isError, data: signupData, error: signupError  } = useSignup ();
+
   const form = useForm<z.infer<typeof loginFormSchema>>({
     resolver: zodResolver(loginFormSchema),
     defaultValues: {
@@ -56,8 +59,25 @@ const RegisterModal = () => {
     },
   });
 
-  const onSubmit = useCallback((values: z.infer<typeof loginFormSchema>) => {
-    console.log(values)
+  const [ isUserExists, setIsUserNotFound ] = useState<boolean> (false); 
+
+  useEffect (() => {
+    if (isSuccess) {
+      console.log (signupData)
+    }
+  }, [isSuccess]);
+
+  useEffect (() => {
+    if (isError) {
+      if ((signupError as string).toString() === 'Email Already Registered') {
+        setIsUserNotFound (true);
+      }
+      console.log (signupError);
+    }
+  }, [isError])
+
+  const onSubmit = useCallback((data: z.infer<typeof loginFormSchema>) => {
+    signup(data);
   }, []);
 
   return (
@@ -104,6 +124,12 @@ const RegisterModal = () => {
               <div>
                 <Button className="w-full">Create account</Button>
               </div>
+              {
+                isUserExists &&
+                <div className="text-center text-red-600 font-semibold">
+                  User Not Found
+                </div>
+              }
             </div>
           </form>
         </Form>

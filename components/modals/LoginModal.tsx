@@ -1,4 +1,5 @@
-import { useCallback } from "react";
+"use client";
+import { useCallback, useEffect, useState } from "react";
 import * as z from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -21,6 +22,9 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/modal";
+import { useLogin } from "@/hooks/api/auth/auth.api";
+import { usePersistedStore } from "@/store";
+
 
 const loginFormSchema = z.object({
   email: 
@@ -41,6 +45,8 @@ const loginFormSchema = z.object({
 
 const LoginModal = () => { 
 
+  const { mutate: login, isSuccess, isError, data: loginData, error: loginError } = useLogin ();
+
   const form = useForm<z.infer<typeof loginFormSchema>>({
     resolver: zodResolver(loginFormSchema),
     defaultValues: {
@@ -49,8 +55,27 @@ const LoginModal = () => {
     },
   });
 
-  const onSubmit = useCallback((values: z.infer<typeof loginFormSchema>) => {
-    console.log(values)
+
+  const [ isUserNotFound, setIsUserNotFound] = useState<boolean> (false); 
+
+  useEffect (() => {
+    if (isSuccess) {
+      usePersistedStore.setState((state) => ({ ...state, authSlice: { userData: loginData } }));
+      window.location.reload ();
+    }
+  }, [isSuccess]);
+
+  useEffect (() => {
+    if (isError) {
+      if ((loginError as string).toString() === 'User not found') {
+        setIsUserNotFound (true);
+      }
+    }
+  }, [isError])
+
+
+  const onSubmit = useCallback((data: z.infer<typeof loginFormSchema>) => {
+    login (data)
   }, []);
 
   return (
@@ -97,6 +122,12 @@ const LoginModal = () => {
               <div>
                 <Button className="w-full">Login</Button>
               </div>
+              {
+                isUserNotFound &&
+                <div className="text-center text-red-600 font-semibold">
+                  User Not Found
+                </div>
+              }
             </div>
           </form>
         </Form>
